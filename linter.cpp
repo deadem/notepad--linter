@@ -59,7 +59,7 @@ std::wstring GetFilePart(unsigned int part)
 
 void showTooltip(std::wstring message = std::wstring())
 {
-  int position = SendEditor(SCI_GETCURRENTPOS);
+  const int position = static_cast<int>(SendEditor(SCI_GETCURRENTPOS));
 
   HWND main = GetParent(getScintillaWindow());
   HWND childHandle = FindWindowEx(main, NULL, L"msctls_statusbar32", NULL);
@@ -147,7 +147,7 @@ void DrawBoxes()
 
   for each(const XmlParser::Error &error in errors)
   {
-    int position = getPositionForLine(error.m_line - 1);
+    int position = static_cast<int>(getPositionForLine(error.m_line - 1));
     position += Encoding::utfOffset(getLineText(error.m_line - 1), error.m_column - 1);
     errorText[position] = error.m_message;
     ShowError(position, position + 1);
